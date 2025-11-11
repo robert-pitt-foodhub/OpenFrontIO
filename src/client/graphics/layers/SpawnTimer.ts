@@ -31,6 +31,11 @@ export class SpawnTimer extends LitElement implements Layer {
   }
 
   tick() {
+    // Throttle updates to every 10 ticks for performance
+    if (this.game.ticks() % 10 !== 0) {
+      return;
+    }
+
     if (this.game.inSpawnPhase()) {
       // During spawn phase, only one segment filling full width
       this.ratios = [
